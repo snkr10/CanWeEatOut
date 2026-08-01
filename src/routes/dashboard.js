@@ -46,9 +46,13 @@ router.get('/', async (req, res, next) => {
     const budgetAmount = await getOrCreateCurrentBudget(yearMonth);
     const { start, end } = getMonthRange(yearMonth);
 
-    const [shoppingSumResult, diningSumResult, settingsResult] = await Promise.all([
+    const [shoppingSumResult, shoppingDatesResult, diningSumResult, settingsResult] = await Promise.all([
       pool.query(
         'SELECT COALESCE(SUM(amount), 0) AS sum FROM shopping_records WHERE record_date BETWEEN $1 AND $2',
+        [start, end]
+      ),
+      pool.query(
+        'SELECT DISTINCT record_date FROM shopping_records WHERE record_date BETWEEN $1 AND $2',
         [start, end]
       ),
       pool.query(
@@ -65,7 +69,8 @@ router.get('/', async (req, res, next) => {
     );
 
     const settings = settingsResult.rows[0];
-    const remainingSaturdays = countRemainingSaturdays(now, yearMonth);
+    const shoppingDates = new Set(shoppingDatesResult.rows.map((r) => r.record_date));
+    const remainingSaturdays = countRemainingSaturdays(now, yearMonth, shoppingDates);
     const shoppingSum = Number(shoppingSumResult.rows[0].sum);
     const diningSum = Number(diningSumResult.rows[0].sum);
     const recentDiningCount = Number(recentDiningResult.rows[0].count);

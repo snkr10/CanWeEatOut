@@ -13,20 +13,26 @@ function computeJudgement({
   const freeBudget = balance - reserved;
   const diningPossibleCount = freeBudget > 0 ? Math.floor(freeBudget / assumedDiningPrice) : 0;
 
-  let message;
+  let headline;
+  let detail;
   if (freeBudget < 0) {
-    message = '今日は控えめに。すでに使いすぎています。';
+    headline = '今日は控えめに';
+    detail = 'すでに使いすぎています';
   } else if (diningPossibleCount <= 0) {
-    message = '今日は控えめに。自由枠がほぼ残っていません。';
+    headline = '今日は控えめに';
+    detail = '自由枠がほぼ残っていません';
   } else if (recentDiningCount >= 2) {
-    message = '今日は控えめに。直近の外食が続いています。';
+    headline = '今日は控えめに';
+    detail = '直近の外食が続いています';
   } else if (recentDiningCount === 1) {
-    message = '今日は外食OK。ただしギリギリなので計画的に。';
+    headline = '今日は外食OK';
+    detail = 'ただしギリギリなので計画的に';
   } else {
-    message = '今日は外食OK！';
+    headline = '今日は外食OK！';
+    detail = '';
   }
 
-  return { balance, freeBudget, diningPossibleCount, message };
+  return { balance, freeBudget, diningPossibleCount, headline, detail };
 }
 
 module.exports = { computeJudgement };

@@ -27,7 +27,8 @@ function animateCount(el, to, formatter, duration = 600) {
     card.classList.add(isGood ? 'ok' : 'warn');
     card.innerHTML = `
       <span class="icon">${isGood ? '🎉' : '🙏'}</span>
-      <p class="message">${data.message}</p>
+      <p class="headline">${data.headline}</p>
+      ${data.detail ? `<p class="detail">${data.detail}</p>` : ''}
     `;
 
     [freeBudgetEl, diningPossibleCountEl, recentDiningCountEl, balanceEl].forEach((el) => el.classList.remove('skeleton'));
@@ -52,7 +53,7 @@ function animateCount(el, to, formatter, duration = 600) {
   } catch (err) {
     card.classList.remove('ok');
     card.classList.add('warn');
-    card.innerHTML = `<span class="icon">⚠️</span><p class="message">読み込みに失敗しました</p>`;
+    card.innerHTML = `<span class="icon">⚠️</span><p class="headline">読み込みに失敗しました</p>`;
     console.error(err);
   }
 })();
