@@ -47,7 +47,7 @@ function animateCount(el, to, formatter, duration = 600) {
       予算: ${formatYen(data.budgetAmount)}<br>
       買い出し合計: ${formatYen(data.shoppingSum)}<br>
       外食合計: ${formatYen(data.diningSum)}<br>
-      月末までの残り土曜日: ${data.remainingSaturdays}回<br>
+      月末までの残り週末: ${data.remainingWeekends}回<br>
       想定買い出し額: ${formatYen(data.assumedShoppingAmount)} / 想定外食単価: ${formatYen(data.assumedDiningPrice)}
     `;
   } catch (err) {

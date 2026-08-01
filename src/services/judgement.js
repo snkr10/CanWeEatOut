@@ -3,13 +3,13 @@ function computeJudgement({
   budgetAmount,
   shoppingSum,
   diningSum,
-  remainingSaturdays,
+  remainingWeekends,
   assumedShoppingAmount,
   assumedDiningPrice,
   recentDiningCount,
 }) {
   const balance = budgetAmount - shoppingSum - diningSum;
-  const reserved = remainingSaturdays * assumedShoppingAmount;
+  const reserved = remainingWeekends * assumedShoppingAmount;
   const freeBudget = balance - reserved;
   const diningPossibleCount = freeBudget > 0 ? Math.floor(freeBudget / assumedDiningPrice) : 0;
 

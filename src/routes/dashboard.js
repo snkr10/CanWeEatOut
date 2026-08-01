@@ -6,7 +6,7 @@ const {
   getYearMonth,
   getMonthRange,
   addMonths,
-  countRemainingSaturdays,
+  countRemainingWeekends,
 } = require('../utils/date');
 const { computeJudgement } = require('../services/judgement');
 
@@ -70,7 +70,7 @@ router.get('/', async (req, res, next) => {
 
     const settings = settingsResult.rows[0];
     const shoppingDates = new Set(shoppingDatesResult.rows.map((r) => r.record_date));
-    const remainingSaturdays = countRemainingSaturdays(now, yearMonth, shoppingDates);
+    const remainingWeekends = countRemainingWeekends(now, yearMonth, shoppingDates);
     const shoppingSum = Number(shoppingSumResult.rows[0].sum);
     const diningSum = Number(diningSumResult.rows[0].sum);
     const recentDiningCount = Number(recentDiningResult.rows[0].count);
@@ -79,7 +79,7 @@ router.get('/', async (req, res, next) => {
       budgetAmount,
       shoppingSum,
       diningSum,
-      remainingSaturdays,
+      remainingWeekends,
       assumedShoppingAmount: settings.assumed_shopping_amount,
       assumedDiningPrice: settings.assumed_dining_price,
       recentDiningCount,
@@ -91,7 +91,7 @@ router.get('/', async (req, res, next) => {
       budgetAmount,
       shoppingSum,
       diningSum,
-      remainingSaturdays,
+      remainingWeekends,
       assumedShoppingAmount: settings.assumed_shopping_amount,
       assumedDiningPrice: settings.assumed_dining_price,
       recentDiningCount,

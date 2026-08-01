@@ -33,17 +33,28 @@ function addMonths(yearMonth, delta) {
   return getYearMonth(d);
 }
 
-// today以降、当該月の末日までの土曜日の数(todayが土曜なら含む)
-// ただし、その日付ですでに買い出し記録がある土曜日は「済んだ実績」として除外する
+// today以降、当該月の末日までの「残り週末(土曜+日曜)」の数
+// 土曜・日曜のどちらか一方にでも買い出し記録があれば、その週末は「済んだ実績」として除外する
 // (実績と確保金の二重計上を防ぐため)
-function countRemainingSaturdays(today, yearMonth, recordedShoppingDates = new Set()) {
+function countRemainingWeekends(today, yearMonth, recordedShoppingDates = new Set()) {
   const { end } = getMonthRange(yearMonth);
   const endDate = new Date(`${end}T00:00:00Z`);
   const cursor = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
 
+  // 今日が日曜の場合、まだ終わっていない「今週末」の土曜(昨日)から数え直す
+  if (cursor.getUTCDay() === 0) {
+    cursor.setUTCDate(cursor.getUTCDate() - 1);
+  }
+
   let count = 0;
   while (cursor <= endDate) {
-    if (cursor.getUTCDay() === 6 && !recordedShoppingDates.has(formatDate(cursor))) count += 1;
+    if (cursor.getUTCDay() === 6) {
+      const saturday = formatDate(cursor);
+      const sunday = formatDate(new Date(cursor.getTime() + 24 * 60 * 60 * 1000));
+      if (!recordedShoppingDates.has(saturday) && !recordedShoppingDates.has(sunday)) {
+        count += 1;
+      }
+    }
     cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
   return count;
@@ -55,5 +66,5 @@ module.exports = {
   getYearMonth,
   getMonthRange,
   addMonths,
-  countRemainingSaturdays,
+  countRemainingWeekends,
 };
