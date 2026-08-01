@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>履歴 | 今日、外食していい？</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="page-header">
+    <h1>過去履歴</h1>
+  </header>
+  <main>
+    <div class="card">
+      <div class="field">
+        <label for="monthSelect">表示する月</label>
+        <select id="monthSelect"></select>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="label">その月の予算</div>
+        <div class="value small" id="histBudget">-</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">買い出し合計 / 外食合計</div>
+        <div class="value small" id="histSums">-</div>
+      </div>
+    </div>
+
+    <div class="section-title">買い出し記録</div>
+    <div class="card">
+      <ul class="record-list" id="histShoppingList"></ul>
+      <div class="empty-state" id="histShoppingEmpty" style="display:none;">記録がありません</div>
+    </div>
+
+    <div class="section-title">外食記録</div>
+    <div class="card">
+      <ul class="record-list" id="histDiningList"></ul>
+      <div class="empty-state" id="histDiningEmpty" style="display:none;">記録がありません</div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><span class="icon">🏠</span>ホーム</a>
+    <a href="shopping.html"><span class="icon">🛒</span>買い出し</a>
+    <a href="dining.html"><span class="icon">🍽️</span>外食</a>
+    <a href="budget.html"><span class="icon">💰</span>予算</a>
+    <a href="history.html" class="active"><span class="icon">📖</span>履歴</a>
+    <a href="settings.html"><span class="icon">⚙️</span>設定</a>
+  </nav>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/history.js"></script>
+</body>
+</html>

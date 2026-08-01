@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>今日、外食していい？</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="page-header">
+    <h1>今日、外食していい？</h1>
+  </header>
+  <main>
+    <div id="judgementCard" class="card judgement-card">
+      <p class="message">読み込み中...</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="label">外食に使える自由枠</div>
+        <div class="value" id="freeBudget">-</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">あと何回外食できるか</div>
+        <div class="value" id="diningPossibleCount">-</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">直近7日間の外食回数</div>
+        <div class="value small" id="recentDiningCount">-</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">今月の残高</div>
+        <div class="value small" id="balance">-</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">今月の内訳</div>
+      <div id="breakdown" style="font-size:14px; color: var(--color-text-sub); line-height:1.8;">-</div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="active"><span class="icon">🏠</span>ホーム</a>
+    <a href="shopping.html"><span class="icon">🛒</span>買い出し</a>
+    <a href="dining.html"><span class="icon">🍽️</span>外食</a>
+    <a href="budget.html"><span class="icon">💰</span>予算</a>
+    <a href="history.html"><span class="icon">📖</span>履歴</a>
+    <a href="settings.html"><span class="icon">⚙️</span>設定</a>
+  </nav>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/top.js"></script>
+</body>
+</html>

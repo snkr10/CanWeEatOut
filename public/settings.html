@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>設定 | 今日、外食していい？</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="page-header">
+    <h1>設定</h1>
+  </header>
+  <main>
+    <div class="card">
+      <div class="section-title">想定買い出し額・想定外食単価</div>
+      <form class="form" id="settingsForm">
+        <div class="field">
+          <label for="assumedShoppingAmount">想定買い出し額（円 / 1回あたり）</label>
+          <input type="number" id="assumedShoppingAmount" inputmode="numeric" min="1" step="1" required />
+        </div>
+        <div class="field">
+          <label for="assumedDiningPrice">想定外食単価（円 / 1回あたり）</label>
+          <input type="number" id="assumedDiningPrice" inputmode="numeric" min="1" step="1" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">保存する</button>
+      </form>
+    </div>
+    <p style="font-size:13px; color: var(--color-text-sub); padding: 0 4px;">
+      実績に応じてこの値を調整すると、判定の精度が上がります。
+    </p>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><span class="icon">🏠</span>ホーム</a>
+    <a href="shopping.html"><span class="icon">🛒</span>買い出し</a>
+    <a href="dining.html"><span class="icon">🍽️</span>外食</a>
+    <a href="budget.html"><span class="icon">💰</span>予算</a>
+    <a href="history.html"><span class="icon">📖</span>履歴</a>
+    <a href="settings.html" class="active"><span class="icon">⚙️</span>設定</a>
+  </nav>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>
